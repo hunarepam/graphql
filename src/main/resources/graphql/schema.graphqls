@@ -1,0 +1,40 @@
+type Query {
+    orders : [Order]
+    orderStates: [OrderState]
+}
+
+type Order {
+    id : ID,
+    name: String,
+    state: OrderState,
+    placedAt: String,
+    products: [Product]
+}
+
+type Product {
+    id : ID,
+    name: String,
+    price: Float,
+    category: ProductCategory,
+}
+
+type OrderState {
+    id: ID,
+    name: String,
+    orders: [Order]
+}
+
+type ProductCategory {
+    id: ID,
+    name: String
+}
+
+input ProductCategoryInput {
+    id: Int,
+    name: String
+}
+
+type Mutation {
+    addProduct(name: String, categoryId: Int, price: Float): Product
+    addCategory(category: ProductCategoryInput): ProductCategory
+}

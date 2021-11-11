@@ -14,11 +14,17 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 @Service
-public record ProductService(
-    ProductRepository productRepository,
-    ProductCategoryRepository categoryRepository,
-    ProductConverter productConverter
-) {
+public class ProductService {
+
+    private final ProductRepository productRepository;
+    private final ProductCategoryRepository categoryRepository;
+    private final ProductConverter productConverter;
+
+    public ProductService(ProductRepository productRepository, ProductCategoryRepository categoryRepository, ProductConverter productConverter) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+        this.productConverter = productConverter;
+    }
 
     public Product storeProduct(String productName, Integer categoryId, Float price) {
         Optional<ProductCategoryEntity> categoryEntity = categoryRepository.findById(categoryId);
